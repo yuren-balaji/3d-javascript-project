@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { OrbitControls } from "jsm/controls/OrbitControls.js";
 
 const w =  window.innerWidth;
 const h =  window.innerHeight;
@@ -19,6 +20,9 @@ camera.position.z = 2;
 
 const scene = new THREE.Scene();
 
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.5;
 
 
 //mesh 
@@ -39,9 +43,9 @@ const wiremat = new THREE.MeshBasicMaterial({
 );
 // reusing the same mesh as icohedron but with wwireframe.
 const wiremesh = new THREE.Mesh(geo,wiremat);
-
 // and god said will there be light.
 const hemilight = new THREE.HemisphereLight(0xffffff,0x000000);
+
 
 scene.add(mesh1);
 scene.add(hemilight);
@@ -55,5 +59,7 @@ function animate(t = 0){
     wiremesh.rotation.x = Math.sin(t * 0.001);
     mesh1.rotation.y = Math.sin(-t * 0.001);
     renderer.render(scene, camera);
+    controls.update();
 }
 animate();
+
