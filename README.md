@@ -1,3 +1,3 @@
 
 
-This is where i have been learning java 3d projects
+This is where i have been learning javascript 3d projects
